@@ -26,3 +26,11 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
 .readout svg{width:100%;height:auto}
 .readout h3,.figure .legend{font-size:14px!important}
 @media(max-width:600px){.readout{grid-template-columns:1fr!important}.four-videos{grid-template-columns:minmax(0,300px)!important}}
+/* Center the reading column independently of the contents rail. */
+@media(min-width:1101px){.post-layout{display:grid;max-width:1180px;grid-template-columns:150px minmax(0,800px) 150px;gap:40px;padding:0;margin:0 auto}.post-body{grid-column:2;grid-row:1}.side-nav{grid-column:3;grid-row:1;padding-top:12px}}
+.post-header{margin-bottom:24px}
+.opening-film{margin:12px 0 32px}
+.post-body>section{margin:36px 0}
+.context-diagram img{display:block;width:100%;height:auto}
+.context-diagram a{display:block;border:0}
+@media(max-width:1300px) and (min-width:1101px){.post-layout{grid-template-columns:110px minmax(0,760px) 110px;gap:24px;max-width:1050px}.side-nav a{font-size:11px}}

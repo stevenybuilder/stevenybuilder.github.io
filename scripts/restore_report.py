@@ -15,6 +15,8 @@ def paragraph(start):
         raise ValueError((start, len(matches)))
     text = html.escape(matches[0])
     text = text.replace('Jim Fan 2026', '<a href="https://x.com/DrJimFan/status/2018754323141054786">Jim Fan 2026</a>')
+    for name, paper in [('Nanda et al.', '2309.00941'), ('Casademunt et al', '2507.16795'), ('Miao et al', '2605.17144')]:
+        text = text.replace(name, f'<a href="https://arxiv.org/abs/{paper}">{name}</a>')
     return '<p data-report-verbatim>' + text + '</p>'
 old = (root/'content/pick-it-up.html').read_text()
 def figure(n):
@@ -29,11 +31,12 @@ def section(id, title, body):
 def prose(*starts): return '<div class="prose">'+''.join(paragraph(s) for s in starts)+'</div>'
 parts = []
 parts.append(section('question','What problem am I trying to solve?',prose('I investigated whether','I hypothesized that')))
-parts.append(section('importance','Why is this important?',prose('Fine-grained control','These steering methods','Most of all, LLMs')))
+diagram='<figure class="figure context-diagram"><a href="/assets/media/mech-interp-world-models.png" target="_blank" rel="noopener"><img loading="lazy" src="/assets/media/mech-interp-world-models.png" width="1672" height="941" alt="Mechanistic interpretability across LLMs, VLAs, and JEPA world models: semantic handles, multimodal actions, and latent-state geometry."></a></figure>'
+parts.append(section('importance','Why is this important?',prose('Fine-grained control','These steering methods','Most of all, LLMs')+diagram))
 parts.append(section('rollouts','Key Experiments',prose('As shown in the first graph above')+figure(1)))
 parts.append(section('language','Readable language was not controlling behavior',prose('Conversely, editing text')+figure(6)))
-parts.append(section('background','Background and Related Work',prose('This work is inspired','Dissecting the model biology','However, VLAs and world models')+figure(10)))
-parts.append(section('geometry','Representation geometry',figure(9)))
+parts.append(section('background','Background and Related Work',prose('This work is inspired','Dissecting the model biology')+figure(10)))
+parts.append(section('geometry','Representation geometry',prose('However, VLAs and world models')+figure(9)))
 # Condense by selecting whole original sentences, never paraphrasing them.
 limit_a = next(p for p in paras if p.startswith('Because I only had two tasks'))
 limit_b = next(p for p in paras if p.startswith('In the future, we could'))
@@ -52,6 +55,8 @@ for n in [2,3,4,5]:
     videos.append(item)
 hero='<figure class="figure opening-film"><video id="opening-video" muted playsinline loop preload="metadata" poster="/assets/media/repair.jpg"><source src="/assets/media/repair.mp4" type="video/mp4"></video></figure>'
 comparison='<div class="rollout-lab" id="rollout-lab"><div class="video-grid four-videos">'+''.join(videos)+'</div></div>'
-opening=hero+comparison+'<blockquote class="code-callout"><a href="https://github.com/stevenybuilder/mechinterp-vla">Code found here</a></blockquote>'
+code='<blockquote class="code-callout"><a href="https://github.com/stevenybuilder/mechinterp-vla">Code found here</a></blockquote>'
+parts=[p.replace(figure(1),comparison+code+figure(1)) if p.startswith('<section id="rollouts"') else p for p in parts]
+opening=hero
 (root/'content/pick-it-up.html').write_text(opening+'\n'+'\n'.join(parts)+'\n')
 print('Restored exact report paragraphs; removed prompt cards, flowchart, controls, and collapsed appendix.')
