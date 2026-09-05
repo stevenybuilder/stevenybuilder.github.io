@@ -81,3 +81,14 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
  .post-body .prose,.post-body .figure figcaption{max-width:none}
  .home-note,.home-post>p{max-width:none}
 }
+/* Balanced desktop scale: wider canvas, bounded text and figures. */
+@media(min-width:801px){
+ .site-header,.post-layout,.post-header,.home,.site-footer{width:calc(100% - 96px);max-width:1280px}
+ .mobile-toc{width:calc(100% - 96px);max-width:1280px}
+ .post-body .prose{max-width:960px;margin-left:auto;margin-right:auto}
+ .article-intro{max-width:1140px;margin:20px auto 28px;grid-template-columns:300px minmax(0,1fr);gap:32px}
+ .article-intro .prose{max-width:none}
+ .post-body .figure:not(.video-box):not(.opening-film){max-width:960px;margin-left:auto;margin-right:auto}
+ .post-body .figure figcaption{max-width:900px;margin-left:auto;margin-right:auto}
+ .home-note,.home-post>p{max-width:960px;margin-left:auto;margin-right:auto}
+}
