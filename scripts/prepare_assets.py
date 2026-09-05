@@ -114,19 +114,22 @@ ax.legend(frameon=False,fontsize=9,ncol=2)
 fig.savefig(MEDIA/'geometry.svg')
 plt.close(fig)
 
-# Remove titles baked into the existing four-panel montage. Native scene tiles
-# are 300px; Lanczos resampling improves presentation, not information content.
+# Preserve the montage's native 300px scene tiles. Encoding an enlarged copy
+# cannot recover the original 360px capture detail. Posters use the lossless
+# published PNG instead of a second-generation decoded video frame.
 video = source('media/videos/state-confirmation/combined.mp4')
+video_receipt = receipts[-1]
 meta = json.loads(source('media/videos/state-confirmation/meta.json').read_text())
+poster = source('media/videos/state-confirmation/poster.png')
 for i,name in enumerate(['conflict','correct','repair','early']):
-    crop=f'crop=300:300:{22+312*i}:157,scale=600:600:flags=lanczos,setsar=1'
+    crop=f'crop=300:300:{22+312*i}:157:exact=1,setsar=1'
     subprocess.run(['ffmpeg','-y','-hide_banner','-loglevel','error','-i',str(video),
-                    '-vf',crop,'-an','-c:v','libx264','-crf','18','-preset','slow',
+                    '-vf',crop,'-an','-c:v','libx264','-crf','16','-preset','slow',
                     '-pix_fmt','yuv420p','-movflags','+faststart',str(MEDIA/f'{name}.mp4')],check=True)
-    subprocess.run(['ffmpeg','-y','-hide_banner','-loglevel','error','-i',str(MEDIA/f'{name}.mp4'),
-                    '-frames:v','1',str(MEDIA/f'{name}.jpg')],check=True)
-save('video-provenance.json', {'source': receipts[-2], 'capture':meta,
-    'transform':'Crop each 300×300 scene tile from published montage; Lanczos resize to 600×600; H.264 CRF18; no frame interpolation or generated detail.',
+    subprocess.run(['ffmpeg','-y','-hide_banner','-loglevel','error','-i',str(poster),
+                    '-vf',crop,'-frames:v','1','-q:v','1',str(MEDIA/f'{name}.jpg')],check=True)
+save('video-provenance.json', {'source': video_receipt, 'capture':meta,
+    'transform':'Crop each native 300×300 scene tile from published montage; H.264 CRF16 with no resize. Posters cropped from lossless published PNG. No frame interpolation or generated detail.',
     'timing':'Original montage samples every second simulator frame at 30 fps; displayed at 0.5x for 30 simulator steps per wall-clock second. Successful runs freeze at completion.'})
 save('sources.json', {'inputs':receipts, 'geometry_note':'New descriptive visualization of archived features. No causal inference follows from the projection.'})
 

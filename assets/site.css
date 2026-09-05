@@ -19,3 +19,10 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
 .opening-film video{display:block;width:min(100%,620px);aspect-ratio:1;margin:auto;background:#eee}
 .code-callout{max-width:760px;margin:24px auto 48px;padding:14px 20px;border-left:4px solid #d6dfd8;background:#f5f7f5;font-size:17px}
 .code-callout a{color:#267453}
+.opening-film video{max-width:300px!important}
+.four-videos{max-width:640px;margin-left:auto;margin-right:auto;grid-template-columns:repeat(2,minmax(0,300px))!important;justify-content:center}
+.four-videos video{max-width:300px;width:100%;cursor:pointer}
+.readout{grid-template-columns:1fr 1fr!important;gap:20px}
+.readout svg{width:100%;height:auto}
+.readout h3,.figure .legend{font-size:14px!important}
+@media(max-width:600px){.readout{grid-template-columns:1fr!important}.four-videos{grid-template-columns:minmax(0,300px)!important}}
