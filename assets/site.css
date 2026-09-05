@@ -98,3 +98,10 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
 .article-intro .opening-film video{display:block;margin:0 auto}
 .article-intro #question{margin:0}
 .article-intro .prose{max-width:960px;margin-left:auto;margin-right:auto}
+/* Keep the article centered, with the original sticky contents rail on its right. */
+@media(min-width:1101px){
+ .post-layout{display:grid;grid-template-columns:140px minmax(0,960px) 140px;gap:20px;align-items:start}
+ .post-body{grid-column:2;grid-row:1;min-width:0}
+ .side-nav{display:block;grid-column:3;grid-row:1;position:sticky;top:28px;align-self:start;padding-top:20px}
+ .mobile-toc{display:none}
+}
