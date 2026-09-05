@@ -34,7 +34,7 @@ parts.append(section('question','What problem am I trying to solve?',prose('I in
 parts.append(section('importance','Why is this important?',prose('Fine-grained control','These steering methods','Most of all, LLMs')))
 parts.append(section('rollouts','Key Experiments',prose('As shown in the first graph above')+figure(1)))
 parts.append(section('language','Readable language was not controlling behavior',prose('Conversely, editing text')+figure(6)))
-parts.append(section('background','Background and Related Work',prose('This work is inspired','Dissecting the model biology')+figure(10)))
+parts.append(section('background','Model biology for physical AI',prose('Dissecting the model biology')+figure(10)))
 parts.append(section('geometry','Representation geometry',prose('However, VLAs and world models')+figure(9)))
 # Condense by selecting whole original sentences, never paraphrasing them.
 limit_a = next(p for p in paras if p.startswith('Because I only had two tasks'))
