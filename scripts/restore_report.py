@@ -31,8 +31,7 @@ def section(id, title, body):
 def prose(*starts): return '<div class="prose">'+''.join(paragraph(s) for s in starts)+'</div>'
 parts = []
 parts.append(section('question','What problem am I trying to solve?',prose('I investigated whether','I hypothesized that')))
-diagram='<figure class="figure context-diagram"><a href="/assets/media/mech-interp-world-models.png" target="_blank" rel="noopener"><img loading="lazy" src="/assets/media/mech-interp-world-models.png" width="1672" height="941" alt="Mechanistic interpretability across LLMs, VLAs, and JEPA world models: semantic handles, multimodal actions, and latent-state geometry."></a></figure>'
-parts.append(section('importance','Why is this important?',prose('Fine-grained control','These steering methods','Most of all, LLMs')+diagram))
+parts.append(section('importance','Why is this important?',prose('Fine-grained control','These steering methods','Most of all, LLMs')))
 parts.append(section('rollouts','Key Experiments',prose('As shown in the first graph above')+figure(1)))
 parts.append(section('language','Readable language was not controlling behavior',prose('Conversely, editing text')+figure(6)))
 parts.append(section('background','Background and Related Work',prose('This work is inspired','Dissecting the model biology')+figure(10)))
