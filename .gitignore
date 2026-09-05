@@ -1,0 +1,10 @@
+.venv/
+.DS_Store
+.playwright-cli/
+output/
+__pycache__/
+node_modules/
+*.docx
+*.pdf
+assets/media/source-frame.png
+
