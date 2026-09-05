@@ -92,3 +92,9 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
  .post-body .figure figcaption{max-width:900px;margin-left:auto;margin-right:auto}
  .home-note,.home-post>p{max-width:960px;margin-left:auto;margin-right:auto}
 }
+/* Restore the original stacked opening without changing later sections. */
+.article-intro{display:block;max-width:960px;margin:20px auto 28px}
+.article-intro .opening-film{margin:0 auto 28px}
+.article-intro .opening-film video{display:block;margin:0 auto}
+.article-intro #question{margin:0}
+.article-intro .prose{max-width:960px;margin-left:auto;margin-right:auto}
