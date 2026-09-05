@@ -40,3 +40,9 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
 .home-plot{display:block;min-width:0}
 .home-plot svg{display:block;width:100%;height:auto}
 @media(max-width:700px){.home-feature-media{grid-template-columns:minmax(0,1fr);gap:24px}.home-plot{display:block;width:100%;max-width:500px;justify-self:center}}
+.home-feature-media{max-width:758px;margin:24px auto 0;grid-template-columns:300px minmax(0,430px);gap:28px;align-items:center}
+.home-plot{max-width:430px}
+.home-post{margin-top:12px}
+.home-post header{margin-bottom:18px}
+.home-caption{max-width:730px;margin:14px auto 24px;line-height:1.6}
+@media(max-width:700px){.home-feature-media{grid-template-columns:minmax(0,1fr);gap:16px}.home-plot{max-width:430px}}
