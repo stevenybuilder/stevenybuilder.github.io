@@ -73,3 +73,11 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
 .post-body .figure{max-width:100%;margin-top:24px;margin-bottom:24px}
 .post-body .prose p{line-height:1.7}
 @media(max-width:800px){.article-intro{grid-template-columns:1fr;gap:20px}.article-intro .opening-film{justify-self:center}.mobile-toc{margin-left:20px;margin-right:20px}}
+/* Use the available desktop width rather than a narrow centered page. */
+@media(min-width:801px){
+ .site-header,.post-layout,.post-header,.home,.site-footer{max-width:none;width:calc(100% - 64px);margin-left:auto;margin-right:auto}
+ .site-header,.post-header,.post-body{padding-left:0;padding-right:0}
+ .mobile-toc{max-width:none;width:calc(100% - 64px);margin-left:auto;margin-right:auto}
+ .post-body .prose,.post-body .figure figcaption{max-width:none}
+ .home-note,.home-post>p{max-width:none}
+}
