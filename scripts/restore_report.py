@@ -57,5 +57,7 @@ comparison='<div class="rollout-lab" id="rollout-lab"><div class="video-grid fou
 code='<blockquote class="code-callout"><a href="https://github.com/stevenybuilder/mechinterp-vla">Code found here</a></blockquote>'
 parts=[p.replace(figure(1),comparison+code+figure(1)) if p.startswith('<section id="rollouts"') else p for p in parts]
 opening=hero
-(root/'content/pick-it-up.html').write_text(opening+'\n'+'\n'.join(parts)+'\n')
+output=opening+'\n'+'\n'.join(parts)+'\n'
+output=re.sub(r'\s*(?:·\s*)?<a href="(?:/assets/data/[^\"]+|https://github.com/stevenybuilder/mechinterp-vla/blob/main/numbers%20audit.md)">[^<]*</a>', '', output)
+(root/'content/pick-it-up.html').write_text(output)
 print('Restored exact report paragraphs; removed prompt cards, flowchart, controls, and collapsed appendix.')
