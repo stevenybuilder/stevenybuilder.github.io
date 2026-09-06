@@ -8,7 +8,7 @@ const cssVersion=createHash('sha256').update(readFileSync(path.join(root,'assets
 const jsVersion=createHash('sha256').update(readFileSync(path.join(root,'assets/site.js'))).digest('hex').slice(0,10);
 const postTitle='Changing a robot’s mind';
 const subtitle='Pick It Up: Does π0.5 Have an Editable Instruction Following Circuit?';
-const links=[['question','The question'],['importance','Why it matters'],['rollouts','Key experiments'],['language','Readable instructions'],['background','Background'],['geometry','Representation geometry'],['limitations','Future directions'],['appendix','Supporting figures'],['references','Code & references']];
+const links=[['question','The question'],['importance','Why it matters'],['rollouts','Finding 1: Image-state control'],['language','Finding 2: Readable instructions'],['background','Background'],['geometry','Representation geometry'],['limitations','Future directions'],['appendix','Supporting figures'],['references','Code & references']];
 const toc=links.map(([id,title])=>`<a href="#${id}">${title}</a>`).join('');
 const dose=JSON.parse(readFileSync(path.join(root,'assets/data/dose.json'),'utf8'));
 const px=i=>52+i*48,py=v=>238-v*175;
