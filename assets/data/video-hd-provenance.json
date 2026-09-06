@@ -1,0 +1,175 @@
+{
+  "capture": {
+    "schema_version": 1,
+    "policy": "/root/.cache/huggingface/hub/models--lerobot--pi05_libero_finetuned_v044/snapshots/8e174154ef5f6c60a8da12ae99c303d8963138c1",
+    "revision": "8e174154ef5f6c60a8da12ae99c303d8963138c1",
+    "task_id": 1,
+    "init_id": 20,
+    "source_records": "visuals_input/state_confirm_episodes.jsonl",
+    "capture_method": "separate agentview display render; policy observations unchanged",
+    "render_size": 1024,
+    "display_transform": "vertical flip only during composition",
+    "panels": [
+      {
+        "condition": "conflict",
+        "donor_layers": null,
+        "n_frames": 281,
+        "frame_shape": [
+          1024,
+          1024,
+          3
+        ],
+        "reproduction_check": "MATCHES",
+        "saved_record": {
+          "task_id": 1,
+          "init_id": 20,
+          "condition": "conflict",
+          "prompt": "pick up the tomato sauce and place it in the basket",
+          "correct_object": "cream_cheese_1",
+          "conflict_object": "tomato_sauce_1",
+          "success": false,
+          "n_steps": 280,
+          "first_touch_set": [
+            "tomato_sauce_1"
+          ],
+          "correct_target_first_touched": false,
+          "conflict_target_first_touched": true,
+          "seed": 20380831
+        }
+      },
+      {
+        "condition": "correct",
+        "donor_layers": null,
+        "n_frames": 125,
+        "frame_shape": [
+          1024,
+          1024,
+          3
+        ],
+        "reproduction_check": "OUTCOME_MATCH_STEP_DRIFT",
+        "exact_field_mismatches": {
+          "n_steps": {
+            "saved": 123,
+            "rendered": 124
+          }
+        },
+        "rendered_n_steps": 124,
+        "saved_record": {
+          "task_id": 1,
+          "init_id": 20,
+          "condition": "correct",
+          "prompt": "pick up the cream cheese and place it in the basket",
+          "correct_object": "cream_cheese_1",
+          "conflict_object": "tomato_sauce_1",
+          "success": true,
+          "n_steps": 123,
+          "first_touch_set": [
+            "cream_cheese_1"
+          ],
+          "correct_target_first_touched": true,
+          "conflict_target_first_touched": false,
+          "seed": 20380831
+        }
+      },
+      {
+        "condition": "state_live",
+        "donor_layers": [
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "n_frames": 134,
+        "frame_shape": [
+          1024,
+          1024,
+          3
+        ],
+        "reproduction_check": "OUTCOME_MATCH_STEP_DRIFT",
+        "exact_field_mismatches": {
+          "n_steps": {
+            "saved": 132,
+            "rendered": 133
+          }
+        },
+        "rendered_n_steps": 133,
+        "saved_record": {
+          "task_id": 1,
+          "init_id": 20,
+          "condition": "state_live",
+          "prompt": "pick up the tomato sauce and place it in the basket",
+          "correct_object": "cream_cheese_1",
+          "conflict_object": "tomato_sauce_1",
+          "success": true,
+          "n_steps": 132,
+          "first_touch_set": [
+            "cream_cheese_1"
+          ],
+          "correct_target_first_touched": true,
+          "conflict_target_first_touched": false,
+          "seed": 20380831
+        }
+      },
+      {
+        "condition": "state_early",
+        "donor_layers": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "n_frames": 281,
+        "frame_shape": [
+          1024,
+          1024,
+          3
+        ],
+        "reproduction_check": "MATCHES",
+        "exact_field_mismatches": {},
+        "rendered_n_steps": 280,
+        "saved_record": {
+          "task_id": 1,
+          "init_id": 20,
+          "condition": "state_early",
+          "prompt": "pick up the tomato sauce and place it in the basket",
+          "correct_object": "cream_cheese_1",
+          "conflict_object": "tomato_sauce_1",
+          "success": false,
+          "n_steps": 280,
+          "first_touch_set": [
+            "tomato_sauce_1"
+          ],
+          "correct_target_first_touched": false,
+          "conflict_target_first_touched": true,
+          "seed": 20380831
+        }
+      }
+    ]
+  },
+  "files": [
+    {
+      "condition": "conflict",
+      "source_sha256": "80e1a927cb4a4a11aad974b228199f9e18220110c88734e8a67f68bec9d07bcb",
+      "published_sha256": "cba04d334feef33595a99cd4428e9dfed9155abf65d31d771d3ae5fdfa7e97f4"
+    },
+    {
+      "condition": "correct",
+      "source_sha256": "7dc03fc3754ca66f3e6f4f5bb0a4de39245bae8745bc451d8d6770c5a1e963dc",
+      "published_sha256": "64299f5959b98c147afd7d62c4975f520cc13487219943966663f2656763a360"
+    },
+    {
+      "condition": "state_live",
+      "source_sha256": "33d05e8555b0efd9deb9b3645e9f4cebf3b2091d46b083bcb497ac63c9f6f330",
+      "published_sha256": "2cca1573db7b11fc9a26aa4e33dfc9ac247f2dd907354da8477b681182a0e8e4"
+    },
+    {
+      "condition": "state_early",
+      "source_sha256": "e341c810232b7f261b243680c2c5983bee98d70815f0b1fb16d13b5bb2c591a4",
+      "published_sha256": "083dde610f70c1b48c9f4f50b2341f824f471118c4024d7c2eb1b16796bc9477"
+    }
+  ]
+}

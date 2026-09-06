@@ -1,10 +1,11 @@
-import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const base=process.env.SITE_URL || 'https://stevenybuilder.github.io';
 const cssVersion=createHash('sha256').update(readFileSync(path.join(root,'assets/site.css'))).digest('hex').slice(0,10);
+const jsVersion=createHash('sha256').update(readFileSync(path.join(root,'assets/site.js'))).digest('hex').slice(0,10);
 const postTitle='Changing a robot’s mind';
 const subtitle='Pick It Up: Does π0.5 Have an Editable Instruction Following Circuit?';
 const links=[['question','The question'],['importance','Why it matters'],['rollouts','Key experiments'],['language','Readable instructions'],['background','Background'],['geometry','Representation geometry'],['limitations','Future directions'],['appendix','Supporting figures'],['references','Code & references']];
@@ -13,10 +14,15 @@ const dose=JSON.parse(readFileSync(path.join(root,'assets/data/dose.json'),'utf8
 const px=i=>52+i*48,py=v=>238-v*175;
 const homeChart=`<svg viewBox="0 0 430 310" role="img" aria-label="Position-dose curve: small patches produce little action progress; all 512 positions produce 0.773." xmlns="http://www.w3.org/2000/svg" style="font:14px sans-serif;fill:#59616a"><text x="52" y="20" fill="#278574">● Object-centered</text><text x="235" y="20" fill="#da8740">● Random</text>${[0,.5,1].map(v=>`<line x1="52" y1="${py(v)}" x2="395" y2="${py(v)}" stroke="#e3e6e8"/><text x="42" y="${py(v)+5}" text-anchor="end">${v.toFixed(1)}</text>`).join('')}${['selected','random'].map((k,j)=>`<polyline points="${dose.map((d,i)=>`${px(i)},${py(d[k])}`).join(' ')}" fill="none" stroke="${j?'#da8740':'#278574'}" stroke-width="2.5"/>`).join('')}${dose.map((d,i)=>`<text x="${px(i)}" y="261" text-anchor="middle">${d.positions}</text>`).join('')}<circle cx="388" cy="${py(dose[7].selected)}" r="4" fill="#386bb0"/><text x="381" y="${py(dose[7].selected)-13}" text-anchor="end" fill="#386bb0" font-weight="bold">${dose[7].selected.toFixed(3)}</text><text x="221" y="298" text-anchor="middle">Image positions replaced</text><text x="16" y="150" transform="rotate(-90 16 150)" text-anchor="middle">Action progress R</text></svg>`;
 function page(title,description,body,route='',nav=''){
+ if(existsSync(path.join(root,'assets/data/video-hd-provenance.json'))){
+  body=body.replace(/\/assets\/media\/(repair|conflict|correct|early)\.(mp4|jpg)/g,'/assets/media/$1-hd.$2');
+  body=body.replace(/<video\b/g,'<video data-playback-rate="1"');
+  body=body.replace('</div></div><blockquote class="code-callout">','</div></div><p class="figure-note">High-resolution reruns of the illustrated case: matching task outcomes, with up to one simulator step of timing variation.</p><blockquote class="code-callout">');
+ }
  if(nav==='home')body=body.replace('<button id="home-play" class="scene-pause" type="button">Play</button>','').replace('<video id="home-video"','<video id="home-video" data-ambient').replace(/<div class="home-plot">[\s\S]*?<\/div>/,`<div class="home-plot">${homeChart}</div>`);
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${title} — Steven Yang</title><meta name="description" content="${description}"><link rel="canonical" href="${base}/${route}"><meta property="og:type" content="${route==='pick-it-up/'?'article':'website'}"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:url" content="${base}/${route}"><meta property="og:image" content="${base}/assets/media/position-dose.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="alternate" type="application/rss+xml" title="Steven Yang — Research notes" href="/feed.xml"><link rel="stylesheet" href="/assets/site.css"><script defer src="/assets/site.js"></script></head><body><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true">s</span><span>Steven Yang<span class="brand-sub">Experiments in model biology</span></span></a><nav class="site-nav" aria-label="Main navigation"><a href="/" ${nav==='home'?'aria-current="page"':''}>Home</a><a href="/writing/" ${nav==='writing'?'aria-current="page"':''}>Writing</a><a href="/about/" ${nav==='about'?'aria-current="page"':''}>About</a></nav></header>${body}<footer class="site-footer"><span>© 2026 Steven Yang</span><span><a href="https://github.com/stevenybuilder">GitHub ↗</a> &nbsp;·&nbsp; <a href="/feed.xml">RSS</a></span></footer></body></html>`;
 }
-function out(file,body){mkdirSync(path.dirname(path.join(root,file)),{recursive:true});writeFileSync(path.join(root,file),body.replaceAll('href="/assets/site.css"',`href="/assets/site.css?v=${cssVersion}"`))}
+function out(file,body){mkdirSync(path.dirname(path.join(root,file)),{recursive:true});writeFileSync(path.join(root,file),body.replaceAll('href="/assets/site.css"',`href="/assets/site.css?v=${cssVersion}"`).replaceAll('src="/assets/site.js"',`src="/assets/site.js?v=${jsVersion}"`))}
 let article=readFileSync(path.join(root,'content/pick-it-up.html'),'utf8');
 article=article.replace(/^(<figure class="figure opening-film">[\s\S]*?<\/figure>)\s*(<section id="question">[\s\S]*?<\/section>)/,'<div class="article-intro">$1$2</div>');
 // Keep captions, without report-style numbering that interrupts the blog.
