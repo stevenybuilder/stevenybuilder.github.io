@@ -103,5 +103,6 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
  .post-layout{display:grid;grid-template-columns:140px minmax(0,960px) 140px;gap:20px;align-items:start}
  .post-body{grid-column:2;grid-row:1;min-width:0}
  .side-nav{display:block;grid-column:3;grid-row:1;position:sticky;top:28px;align-self:start;padding-top:20px}
- .mobile-toc{display:none}
+.mobile-toc{display:none}
 }
+.social-links{display:inline-flex;gap:14px;align-items:center;flex-wrap:wrap}.social-links a{color:inherit;text-decoration:none}.social-links a:hover,.social-links a:focus-visible{text-decoration:underline}
