@@ -105,4 +105,4 @@ h1,h2{font-family:var(--sans);font-weight:650;letter-spacing:-.7px}h1{font-size:
  .side-nav{display:block;grid-column:3;grid-row:1;position:sticky;top:28px;align-self:start;padding-top:20px}
 .mobile-toc{display:none}
 }
-.social-links{display:inline-flex;gap:14px;align-items:center;flex-wrap:wrap}.social-links a{color:inherit;text-decoration:none}.social-links a:hover,.social-links a:focus-visible{text-decoration:underline}
+.social-links{display:inline-flex;gap:14px;align-items:center;flex-wrap:wrap}.social-links a{color:inherit;text-decoration:none;display:inline-flex}.social-links a:hover,.social-links a:focus-visible{opacity:.65}.social-links img{width:19px;height:19px;display:block}.brand-mark img{width:100%;height:100%;object-fit:contain;border-radius:50%;display:block}
